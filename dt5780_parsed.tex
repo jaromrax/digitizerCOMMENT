@@ -1,0 +1,167 @@
+% created by /home/ojr/00_central/lat ...ver.1512.17.22
+\documentclass[12pt]{article}
+\usepackage{a4}
+%-----czech    x    for english: comment out
+\usepackage[czech]{babel}
+\usepackage[latin2]{inputenc}
+%----------
+\usepackage{epsfig}      %  \epsfig{width=6cm,figure=integ1.eps}
+\usepackage{txfonts}     % LAMBDABAR
+\usepackage{indentfirst} % first row in parag. indented
+\usepackage{enumitem}    % http://ctan.org/pkg/enumitem
+\usepackage{graphicx}    % includes jpg(pdflatex neccessary) and eps also. Landscape
+
+%A4 setting
+\voffset  -1cm
+\hoffset  -1cm
+\textheight 23cm
+\textwidth  17cm
+
+\parindent 0mm                         % paragraph indent ZERO
+\renewcommand{\baselinestretch}{1.0}   % reduce row spacing from 1 to 0.5
+%\setlength{\parskip}{1.0}              % reduce vertical paragraph spacing
+%\addtolength{\parskip}{\baselineskip} % paragraph spacing added
+
+\pagestyle{empty}              % no page numbers
+                               % eps picture width
+\newlength{\picwid}
+\setlength{\picwid}{9cm}
+\newlength{\picwida}
+\setlength{\picwida}{\picwid}
+\addtolength{\picwida}{1mm}
+
+%%%%    \Huge  \Large  \large  \normalsize  \footnotesize  \small   \tiny
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%
+%  \hfill NPI CAS, Řež, Czech Republic \
+%  \hfill November 6. 2015 
+%  \vskip 5mm \hrule \vskip 2cm
+%  \large
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \title{Manual and tricks with DT5780 digitizer for HPGe}
+ \maketitle
+
+ \section{Ta 15 measurement 25.1.2016 }
+
+ Lead chateau - CLOSE.
+ 
+ From root files : countrate 95 cps, measurement time 18:20 minutes.
+
+ Table in mc2:
+
+ Time 66038.605 seconds, live time 64926.224,
+ spectrum counts 6225879,  total counts 6332547.
+
+ 
+\begin{table}[!ht]
+\centering{
+\begin{tabular}{|l|l|l|}  \hline
+. & List & N42 \\ 
+\hline
+Total & 6332547 & 6225879 \\ 
+PileUP & 34078 & 106668?is\_difference \\ 
+dt & 0.54\%+0.62\% & 1.68\% \\ 
+ElessZero & 34600 & Unknown \\ 
+Ehigher16370 & 3517 & 3522 \\ 
+Saturation & 39498 & Unknown \\ 
+Area1460 & 63025 & 62837.7 \\ 
+\hline \end{tabular}
+
+}
+\end{table}
+
+ 
+What is the correct formula for the dead time in LISTMODE?
+
+NOT - because contradition to high rate $ 2 \times PileUP + Saturation / Total $
+
+$  PileUP + Saturation + ElessZero / Total $ 
+
+Both give approx. 108 000 which is simmilar to what is expected
+\vskip 3mm
+
+OR $  2 \times PileUP + Saturation + ElessZero / Total $  gives 142 000, which is 2.2\% - NOT due to high rate contradiction
+
+Saturations than 0.6 cps
+
+
+
+\section{Test 26.1.2016}
+
+\subsection{ 60Co - Co60p8} : rate 9.9e+3~cps,   deadtime in mc2~=~14.5\%.
+
+Run - Cobalt - pos8 - start 14:34 - actual 13500 cps, 19\% DT.  Pb-chateau open.
+
+Realtime 4646 sec.
+
+{\bf RESULTS: }
+\begin{table}[!ht]
+\centering{
+\begin{tabular}{|l|l|l|}  \hline
+. & List & N42 \\ 
+\hline
+Total & 61553k & 50633k \\ 
+PileUP & 10914k & 10920k?is.difference \\ 
+dt & 17.73\% & 19.2\% \\ 
+ElessZero & 2761 & Unknown \\ 
+Ehigher16370 & 445 & 489 \\ 
+Saturation & 3224 & Unknown \\ 
+Area1460 & 13449.4 & 13557.5 \\ 
+\hline \end{tabular}
+
+}
+\end{table}
+
+ 
+{\bf K-40  line:}
+
+...  in Tantal 15: 0.95 cps - CLOSE ... no DT correction 
+
+... in 60Co : 2.91 cps - OPEN ... no DT correction 
+
+
+{\bf Rates - that are connected to saturations: }
+
+High energy TAIL - is connected to saturation.
+
+Less than zero -  is connected to saturation.
+
+Lead around ORTEC - is it activated? Low saturation 10x less than with Lead close..
+
+
+
+Saturations in average 0.7~cps for all cases.
+
+
+\subsection{ 152Eu - Eu152p10.n42 }
+
+ rate 6.57e+3~cps,  OCR=5.923~cps  deadtime in mc2~=~9.88\%.
+
+Run - Eu - position 10 - start 16:08 - lead chateau OPEN
+
+Realtime 2618 sec.  Count-total 17 209 810    Counts-spectral 15 509 444
+
+
+{\bf RESULTS: }
+\begin{table}[!ht]
+\centering{
+\begin{tabular}{|l|l|l|}  \hline
+. & List & N42 \\ 
+\hline
+Total & 17059k & 15509k \\ 
+PileUP & 1546k & 1550k?is.difference \\ 
+dt & 9.07\% & 9.89\% \\ 
+ElessZero & 1755 & Unknown \\ 
+Ehigher16370 & 872 & 887 \\ 
+Saturation & 1837 & Unknown \\ 
+\hline \end{tabular}
+
+}
+\end{table}
+
+
+Saturations - again the same  0.7cps. {\bf Saturations can make problems
+  during low activities - long term measurements ? }
+
+\end{document}
